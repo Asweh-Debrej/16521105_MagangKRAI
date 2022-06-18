@@ -30,16 +30,11 @@ int main() {
     cakru4.Sabotage(cakru2);
     cakru2.Sabotage(cakru4);
 
-    cakru4.tampil();
-    cakru2.tampil();
-    cakru3.tampil();
-    cout << cakru3.getJumlahCakru() << endl;
-
     Leaderboard.add(cakru1);
     Leaderboard.add(cakru2);
     Leaderboard.add(cakru3);
     Leaderboard.add(cakru4);
-    cout << "keluar " <<  Leaderboard.find(222222)->getNama() << " koasdasong" << endl;
+    Leaderboard.show();
 
     return 0;
 }
