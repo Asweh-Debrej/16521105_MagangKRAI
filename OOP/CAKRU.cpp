@@ -15,7 +15,6 @@ CAKRU::CAKRU():id(jumlahCakru + 1) {
     this->lokasi = this->tempatPulang;
     this->nilai = DEFAULT_NILAI;
     this->attack = DEFAULT_ATTACK;
-    jumlahCakru++;
     cout << "CAKRU " << this->nama << " telah dibuat dengan hampa." << endl;
 }
 
@@ -27,7 +26,9 @@ CAKRU::CAKRU(string nama, string jurusan, int nim):id(jumlahCakru + 1) {
     this->lokasi = lokasi;
     this->nilai = DEFAULT_NILAI;
     this->attack = DEFAULT_ATTACK;
-    jumlahCakru++;
+    if (this->nim != 0) {
+        jumlahCakru++;
+    }
     cout << "CAKRU " << this->nama << " telah dibuat." << endl;
 }
 
@@ -39,7 +40,9 @@ CAKRU::CAKRU(const CAKRU &panutan):id(jumlahCakru + 1) {
     this->lokasi = panutan.lokasi;
     this->nilai = DEFAULT_NILAI;
     this->attack = DEFAULT_ATTACK;
-    jumlahCakru++;
+    if (this->nim != 0) {
+        jumlahCakru++; // nim 0 gadianggap cakru
+    }
     cout << "CAKRU " << this->nama << " telah disalin." << endl;
 }
 
@@ -83,6 +86,11 @@ void CAKRU::tampilSekilas() {
 }
 
 void CAKRU::setNIM(int nim) {
+    if ((this->nim == 0) && (nim != 0)) {
+        this->jumlahCakru++;
+    } else if ((this->nim != 0) && (nim == 0)) {
+        this->jumlahCakru--;
+    }
     this->nim = nim;
 }
 
