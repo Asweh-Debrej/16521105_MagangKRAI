@@ -1,24 +1,45 @@
-#include "CAKRU.cpp"
-
+#include "RankingCAKRU.cpp"
 
 
 int main() {
+    RankingCAKRU Leaderboard;
+    CAKRU cakru1;
+    CAKRU cakru2("aan yang pertama", "stei", 222222);
+    CAKRU cakru3 = cakru2;
+    cakru3.setNama("aan yang kedua");
+    cakru3.setNIM(333333);
+    cakru1.tampil();
+    cakru2.tampil();
+    cakru3.tampil();
     
-    CAKRU kru1(1);
-    CAKRU kru2(2);
-    CAKRU kru3(3);
+    cakru2.tampilSekilas();
+    cakru3.tampilSekilas();
+    cakru3.Sabotage(cakru2);
+    cakru2.tampilSekilas();
+    cakru3.tampilSekilas();
+    cakru2.Romusha(cakru3);
+    cakru2.tampilSekilas();
+    cakru3.tampilSekilas();
+    cakru3.Romusha(cakru2);
+    cakru2.tampilSekilas();
+    cakru3.tampilSekilas();
+    CAKRU cakru4 = cakru3;
+    cakru4.setNama("aan yang ketiga");
+    cakru4.setNIM(444444);
+    cakru4.tampilSekilas();
+    cakru4.Sabotage(cakru2);
+    cakru2.Sabotage(cakru4);
 
-    for (int i = 0; i < 7; i++) {
-        std::cout << "\n\n\nGiliran Ke-" << i+1 << std::endl;
-        kru1.turn(kru2, kru3);
-        kru2.turn(kru3, kru1);
-        kru3.turn(kru1, kru2);
-    }
+    cakru4.tampil();
+    cakru2.tampil();
+    cakru3.tampil();
+    cout << cakru3.getJumlahCakru() << endl;
 
-    std::cout << "Giliran habis!" << std::endl;
-    kru1.tampil();
-    kru2.tampil();
-    kru3.tampil();
+    Leaderboard.add(cakru1);
+    Leaderboard.add(cakru2);
+    Leaderboard.add(cakru3);
+    Leaderboard.add(cakru4);
+    cout << "keluar " <<  Leaderboard.find(222222).getNama() << " koasdasong" << endl;
 
     return 0;
 }
