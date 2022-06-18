@@ -3,111 +3,129 @@
 #include <iostream>
 #include <string>
 
+using namespace std;
 
-CAKRU::CAKRU() {
-    this->jurusan = "kosong";
-    this->lokasi = "kosong";
+int CAKRU::jumlahCakru = 0;
+
+CAKRU::CAKRU():id(jumlahCakru + 1) {
+    this->nim = 0;
+    this->tempatPulang = "rahim mamah";
     this->nama = "kosong";
+    this->jurusan = "kosong";
+    this->lokasi = this->tempatPulang;
+    this->nilai = DEFAULT_NILAI;
+    this->attack = DEFAULT_ATTACK;
+    jumlahCakru++;
+    cout << "CAKRU " << this->nama << " telah dibuat dengan hampa." << endl;
 }
 
-CAKRU::CAKRU(int id) {
-    int nim;
-    std::string nama;
-    std::string jurusan;
-    std::string lokasi;
-
-    std::cout << "\nCAKRU " << id << std::endl;
-    std::cout << "Nama : ";
-    std::cin >> nama;
-    this->nama = nama;
-    std::cout << "Jurusan : ";
-    std::cin >> jurusan;
-    this->jurusan = jurusan;
-    std::cout << "Nim : ";
-    std::cin >> nim;
+CAKRU::CAKRU(string nama, string jurusan, int nim):id(jumlahCakru + 1) {
     this->nim = nim;
-    std::cout << "Tempat hidup : ";
-    std::cin >> lokasi;
+    this->tempatPulang = "rahim mamah";
+    this->nama = nama;
+    this->jurusan = jurusan;
     this->lokasi = lokasi;
-    this->nilai = 100;
-    this->attack = 15;
-    this->summon();
+    this->nilai = DEFAULT_NILAI;
+    this->attack = DEFAULT_ATTACK;
+    jumlahCakru++;
+    cout << "CAKRU " << this->nama << " telah dibuat." << endl;
 }
 
-CAKRU::~CAKRU() {
-    this->pulang();
-    delete[] this;
+CAKRU::CAKRU(const CAKRU &panutan):id(jumlahCakru + 1) {
+    this->nim = panutan.nim;
+    this->tempatPulang = panutan.tempatPulang;
+    this->nama = panutan.nama;
+    this->jurusan = panutan.jurusan;
+    this->lokasi = panutan.lokasi;
+    this->nilai = DEFAULT_NILAI;
+    this->attack = DEFAULT_ATTACK;
+    jumlahCakru++;
+    cout << "CAKRU " << this->nama << " telah disalin." << endl;
 }
 
-void CAKRU::summon() {
-    std::cout << "CAKRU " << this->nama << " disummon ke " << this->lokasi << std::endl;
+void CAKRU::summon(string lokasi) {
+    this->lokasi = lokasi;
+    cout << "CAKRU " << this->nama << " disummon ke " << lokasi << endl;
 }
 
 void CAKRU::pulang() {
-    std::cout << "CAKRU " << this->nama << " telah pulang dari " << this->lokasi << "." << std::endl;
+
+    cout << "CAKRU " << this->nama << " telah pulang dari " << this->lokasi << " ke rahim mamah." << endl;
 }
 
 void CAKRU::tidur() {
-    std::cout << "CAKRU " << this->nama << " tidur di " << this->lokasi << "." << std::endl;
+    cout << "CAKRU " << this->nama << " tidur di " << this->lokasi << "." << endl;
 }
 
 void CAKRU::Romusha(CAKRU &korban) {
-    std::cout << "CAKRU " << this->nama << " meROMUSHA " << korban.nama << ". Sebagai gantinya, nilai CAKRU " << this->nama << " juga bertambah setengah attacknya!" << std::endl;
+    cout << "CAKRU " << this->nama << " meROMUSHA " << korban.nama << ". Sebagai gantinya, attack CAKRU " << this->nama << " bertambah seperlima attacknya!" << endl;
     korban.nilai += this->attack;
-    this->attack += this->attack/2;
+    this->attack += this->attack/5;
 }
 
 void CAKRU::Sabotage(CAKRU &korban) {
-    std::cout << "CAKRU " << this->nama << " meSABOTAGE " << korban.nama << "." << std::endl;
+    cout << "CAKRU " << this->nama << " meSABOTAGE " << korban.nama << "." << endl;
     korban.nilai -= this->attack;
 }
 
-void CAKRU::turn(CAKRU &korban1, CAKRU &korban2) {
-    int act;
-    std::cout << "\nSekarang giliran CAKRU " << this->nama << std::endl;
-    std::cout << "nilai : " << this->nilai << ", attack : " << this->attack << std::endl;
-    std::cout << "\n mau ngapain?" << std::endl;
-    std::cout << " 1. SABOTASE" << std::endl;
-    std::cout << " 2. ROMUSHA" << std::endl;
-    std::cout << " 3. Tidur" << std::endl;
-    std::cout << ">>> " << std::endl;
-    std::cin >> act;
-    std::cout << std::endl;
-
-    if (act == 1) {
-        std::cout << "Mau SABOTASE siapa?" << std::endl;
-        std::cout << "1. " << korban1.nama << std::endl;
-        std::cout << "2. " << korban2.nama << std::endl;
-        std::cout << ">>> " << std::endl;
-        std::cin >> act;
-        std::cout << std::endl;
-        if (act == 1) {
-            this->Sabotage(korban1);
-        } else if (act == 2) {
-            this->Sabotage(korban2);
-        }
-    } else if (act == 2) {
-        std::cout << "Mau ROMUSHA siapa?" << std::endl;
-        std::cout << "1. " << korban1.nama << std::endl;
-        std::cout << "2. " << korban2.nama << std::endl;
-        std::cout << ">>> " <<std::endl;
-        std::cin >> act;
-        std::cout << std::endl;
-        if (act == 1) {
-            this->Romusha(korban1);
-        } else if (act == 2) {
-            this->Romusha(korban2);
-        }
-    } else if (act == 3) {
-        this->tidur();
-    }
+void CAKRU::tampil() {
+    cout << endl;
+    cout << "NIM     : " << this->nim << endl;
+    cout << "Nama    : " << this->nama << endl;
+    cout << "Nilai   : " << this->nilai << endl;
+    cout << "Attack  : " << this->attack << endl;
+    cout << "Jurusan : " << this->jurusan << endl;
+    cout << endl;
 }
 
-void CAKRU::tampil() {
-    std::cout << "\n\nCAKRU " << this->nama << std::endl;
-    std::cout << std::endl;
-    std::cout << "Nim           : " << this->nim << std::endl;
-    std::cout << "Nilai         : " << this->nilai << std::endl;
-    std::cout << "Jurusan       : " << this->jurusan << std::endl;
-    std::cout << "Tempat perang : " << this->lokasi << std::endl;
+void CAKRU::tampilSekilas() {
+    cout << "Nilai " << this->nama << " : " << this->nilai << " dengan attack : " << this->attack << endl;
+}
+
+void CAKRU::setNIM(int nim) {
+    this->nim = nim;
+}
+
+void CAKRU::setAttack(float attack) {
+    this->attack = attack;
+}
+
+void CAKRU::setNilai(float nilai) {
+    this->nilai = nilai;
+}
+
+void CAKRU::setNama(string nama) {
+    this->nama = nama;
+}
+
+void CAKRU::setJurusan(string jurusan) {
+    this->jurusan = jurusan;
+}
+
+void CAKRU::setLokasi(string lokasi) {
+    this->lokasi = lokasi;
+}
+
+int CAKRU::getNIM() const {
+    return this->nim;
+}
+
+int CAKRU::getJumlahCakru() const {
+    return this->jumlahCakru;
+}
+
+float CAKRU::getNilai() const {
+    return this->nilai;
+}
+
+string CAKRU::getNama() const {
+    return this->nama;
+}
+
+string CAKRU::getJurusan() const {
+    return this->jurusan;
+}
+
+string CAKRU::getLokasi() const {
+    return this->lokasi;
 }

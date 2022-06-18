@@ -4,28 +4,53 @@
 #include <iostream>
 #include <string>
 
+using namespace std;
+
+#define DEFAULT_NILAI 100
+#define DEFAULT_ATTACK 15
+
 class CAKRU {
     private:
-        unsigned id;
-        unsigned int nim;
-        unsigned int nilai;
-        unsigned int attack;
-        std::string nama;
-        std::string jurusan;
-        std::string lokasi;
+        const int id;
+        static int jumlahCakru;
+        int nim;
+        float attack;
+        float nilai;
+        string nama;
+        string jurusan;
+        string lokasi;
+        string tempatPulang;
 
     public:
         CAKRU();
-        CAKRU(int id);
+        CAKRU(string nama, string jurusan, int nim);
         CAKRU(const CAKRU&);
-        ~CAKRU();
-        void summon();
+
+        // Method
+        void summon(string lokasi);
         void pulang();
         void tidur();
         void Sabotage(CAKRU &korban);
         void Romusha(CAKRU &korban);
-        void turn(CAKRU &korban1, CAKRU &korban2);
         void tampil();
+        void tampilSekilas();
+
+        // Setter
+        void setNIM(int nim);
+        void setAttack(float attack);
+        void setNilai(float nilai);
+        void setNama(string nama);
+        void setJurusan(string jurusan);
+        void setLokasi(string lokasi);
+        
+        // Getter
+        int getID() const;
+        int getNIM() const;
+        int getJumlahCakru() const;
+        float getNilai() const;
+        string getNama() const;
+        string getJurusan() const;
+        string getLokasi() const;
 };
 
 
