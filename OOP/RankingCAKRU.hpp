@@ -21,7 +21,7 @@ class RankingCAKRU {
         void add(CAKRU &cakru);
         void remove(int nim);
         void show();
-        CAKRU find(int nim);
+        CAKRU *find(int nim);
 
 
 };

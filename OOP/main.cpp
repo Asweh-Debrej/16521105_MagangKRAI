@@ -39,7 +39,7 @@ int main() {
     Leaderboard.add(cakru2);
     Leaderboard.add(cakru3);
     Leaderboard.add(cakru4);
-    cout << "keluar " <<  Leaderboard.find(222222).getNama() << " koasdasong" << endl;
+    cout << "keluar " <<  Leaderboard.find(222222)->getNama() << " koasdasong" << endl;
 
     return 0;
 }

@@ -33,9 +33,9 @@ void RankingCAKRU::add(CAKRU &cakru) {
 }
 
 void RankingCAKRU::remove(int nim) {
-    cout << "CAKRU " << this->find(nim).getNama() << " telah dikeluarkan dari leaderboard " << this->namaLeaderBoard << "." << endl;
+    cout << "CAKRU " << this->find(nim)->getNama() << " telah dikeluarkan dari leaderboard " << this->namaLeaderBoard << "." << endl;
     this->jumlahCakru --;
-    delete &this->find(nim);
+    delete this->find(nim);
 }
 
 void RankingCAKRU::show() {
@@ -44,12 +44,12 @@ void RankingCAKRU::show() {
     }
 }
 
-CAKRU &RankingCAKRU::find(int nim) {
+CAKRU *RankingCAKRU::find(int nim) {
     CAKRU hasil;
     for(int i = 0; i < this->jumlahCakru; i++) {
         if (this->listCakru[i].getNIM() == nim) {
-            return this->listCakru[i];
+            return &this->listCakru[i];
         }
     }
-    return hasil;
+    return &hasil;
 }
